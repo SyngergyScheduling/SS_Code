@@ -1,3 +1,7 @@
+/* CSS that should go for every page.     */
+/* If you don't want it everywhere, don't */
+/* put it here.                           */
+
 body {
   background-color: #66a1ee;
   height: 100%;
