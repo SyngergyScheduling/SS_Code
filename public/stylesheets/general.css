@@ -1,0 +1,14 @@
+body {
+  background-color: #66a1ee;
+  height: 100%;
+  margin: 0;
+}
+
+.title {
+  /* need to pick a good font for this */
+  background-color: #242424;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 6px;
+  margin: 10px;
+}
