@@ -1,24 +1,40 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is where it gets real
 
-Things you may want to cover:
 
-* Ruby version
+As of right now the site is hosted at SynergyScheduling.duckdns.org:3000
 
-* System dependencies
+Eventually I will set up a better server on the pi that runs on port 80 but right now it's just the default webrick server bundled with ruby on rails.
 
-* Configuration
+# Server information
+* Raspberry pi 2
+* Arch Linux (so the latest of the latest software)
+* ruby version 2.3.1
+* rails version 5.0.0.1
 
-* Database creation
+# Guidelines
+* Please don't `git push origin master`, doing that too much would likely blow up the pi and burn my house down.
+* When making a pull request to master add everyone as a reviewer. This ensures code is (hopefully) reviewed by everyone. Mistakes and bad style can be caught sooner this way and then we don't have to waste time fixing silly best practice things.
+* Read the style guides.
+* These are guidelines.
 
-* Database initialization
+#Tutorials and Documentation
+One of ten thousand ruby tutorials:
+    http://www.tutorialspoint.com/ruby/
 
-* How to run the test suite
+One of ten thousand of rails tutorials:
+    http://guides.rubyonrails.org/getting_started.html
 
-* Services (job queues, cache servers, search engines, etc.)
+The ruby style guide
+    https://github.com/bbatsov/ruby-style-guide
 
-* Deployment instructions
+The rails style guide
+    https://github.com/bbatsov/rails-style-guide
 
-* ...
+Everything ruby documentation
+    http://ruby-doc.org/
+
+
+
+Don't sleep
