@@ -2,6 +2,8 @@
 /* If you don't want it everywhere, don't */
 /* put it here.                           */
 
+/* http://paletton.com/#uid=13I0u0ki5iwacsqf0nbmQfos0a- */
+
 body {
   background-color: #304262;
   height: 100%;
@@ -15,5 +17,6 @@ body {
   color: #FFFFFF;
   text-align: center;
   padding: 6px;
-  margin: 10px;
+  margin: 0px;
+
 }
