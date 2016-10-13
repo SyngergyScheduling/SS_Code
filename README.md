@@ -15,7 +15,6 @@ Eventually I will set up a better server on the pi that runs on port 80 but righ
 
 # Guidelines
 * Please don't `git push origin master`, doing that too much would likely blow up the pi and burn my house down.
-* When making a pull request to master add everyone as a reviewer. This ensures code is (hopefully) reviewed by everyone. Mistakes and bad style can be caught sooner this way and then we don't have to waste time fixing silly best practice things.
 * Read the style guides.
 * These are guidelines.
 
