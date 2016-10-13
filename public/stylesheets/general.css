@@ -3,14 +3,15 @@
 /* put it here.                           */
 
 body {
-  background-color: #66a1ee;
+  background-color: #304262;
   height: 100%;
   margin: 0;
+  padding: 0;
 }
 
 .title {
   /* need to pick a good font for this */
-  background-color: #242424;
+  background-color: #6B7B96;
   color: #FFFFFF;
   text-align: center;
   padding: 6px;
