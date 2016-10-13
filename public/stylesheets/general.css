@@ -1,0 +1,19 @@
+/* CSS that should go for every page.     */
+/* If you don't want it everywhere, don't */
+/* put it here.                           */
+
+body {
+  background-color: #304262;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#title {
+  /* need to pick a good font for this */
+  background-color: #6B7B96;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 6px;
+  margin: 10px;
+}
