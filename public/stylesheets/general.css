@@ -9,7 +9,7 @@ body {
   padding: 0;
 }
 
-.title {
+#title {
   /* need to pick a good font for this */
   background-color: #6B7B96;
   color: #FFFFFF;
