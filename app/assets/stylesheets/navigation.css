@@ -12,6 +12,10 @@
   margin-top: 0px;
 }
 
+#login {
+  background-color: #000000;
+}
+
 #navigation ul li {
   display: inline;
   margin: 0px;
