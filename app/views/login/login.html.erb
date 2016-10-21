@@ -4,7 +4,7 @@
 </div>
 <%= render 'shared/navigation' %>
 <div id=login>
-  <%= form_for :login do |f| %>
+  <%= form_for :login, url: {action: 'submit'} do |f| %>
     <%= f.label :username %><br>
     <%= f.text_field :username %><br>
     <%= f.label :password %><br>
