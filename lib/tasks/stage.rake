@@ -5,6 +5,6 @@ task :stage do
   date = Time.now
   username = "TestUser"
   password = BCrypt::Password.create("TestPass1")
-  db.execute "insert into referees values (?, ?, ?, ?, ?)", [0, username, password, date.to_s, date.to_s]
+  db.execute "insert into referees values (?, ?, ?, ?, ?, ?)", [0, username, password, date.to_s, date.to_s, 0]
   db.close
 end
