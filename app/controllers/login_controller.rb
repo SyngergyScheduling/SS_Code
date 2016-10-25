@@ -16,11 +16,18 @@ class LoginController < ApplicationController
   end
 
   def create
-    puts params[:username]
-    puts params[:password]
-    puts params[:level]
+    puts user_params
     referee = Referee.new(user_params)
     referee.save
+    render :json => {'id': referee.id}
+  end
+
+  def delete
+    Referee.find(params['id']).destroy
+  end
+
+  private def delete_params
+    params.permit(:id)
   end
 
   private def user_params
