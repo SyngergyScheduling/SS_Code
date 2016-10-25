@@ -11,7 +11,7 @@ class LoginController < ApplicationController
       session[:user_id] = ref.id
       redirect_to '/'
     else
-      redirect_to '/login/login'
+      redirect_to '/login'
     end
   end
 
