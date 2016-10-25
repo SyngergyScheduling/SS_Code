@@ -16,6 +16,6 @@ class LoginController < ApplicationController
   end
 
   def create
-    
+    puts params[:id]
   end
 end
