@@ -16,6 +16,14 @@ class LoginController < ApplicationController
   end
 
   def create
-    puts params[:id]
+    puts params[:username]
+    puts params[:password]
+    puts params[:level]
+    referee = Referee.new(user_params)
+    referee.save
+  end
+
+  private def user_params
+    params.permit(:username, :password, :level)
   end
 end
