@@ -8,7 +8,8 @@ end
 task :update do
   system 'git checkout master'
   system 'git pull origin master'
-  system 'raild db:migrate'
+  system 'bundle install'
+  system 'rails db:migrate'
 end
 
 task :shutdown do
