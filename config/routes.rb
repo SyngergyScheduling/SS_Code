@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   get 'teams/all'
   get '/team_scoring/teamScoring'
   post 'login/submit'
+  post 'team_scoring/score'
   root 'home#index'
 end
