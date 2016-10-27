@@ -15,6 +15,11 @@ class LoginController < ApplicationController
     end
   end
 
+  def logout
+    session[:user_id] = nil
+    redirect_to '/login'
+  end
+
   def create
     puts params[:username]
     puts params[:password]
