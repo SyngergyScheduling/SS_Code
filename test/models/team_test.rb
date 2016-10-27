@@ -1,7 +1,12 @@
 require 'test_helper'
 
 class TeamTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+   test "the truth" do
+     assert true
+   end
+
+   test "should not save team without name" do
+     team = Team.new
+     assert_not team.save
+   end
 end
