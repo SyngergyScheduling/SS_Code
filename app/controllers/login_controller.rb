@@ -9,6 +9,7 @@ class LoginController < ApplicationController
     password = params['login']['password']
     ref = Referee.find_by_username(username)
     if ref && ref.authenticate(password)
+      session[:login_fail] = false
       session[:user_id] = ref.id
       redirect_to '/'
     else
