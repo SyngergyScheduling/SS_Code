@@ -1,0 +1,26 @@
+<div id=title>
+  <h1>Synergy Scheduling</h1>
+</div>
+<%= render 'shared/navigation' %>
+
+<div id=match>
+  <h1>Scores for Team1 vs. Team2</h1>
+</div>
+
+<div id=title>
+  <%= form_for :scoring do |f| %>
+  <p>
+    <%= f.label :Team1 %>
+    <%= f.text_field :Team %>
+
+  
+
+    <%= f.label :Team2 %>
+    <%= f.text_field :Team %>
+  </p>
+  
+  <p>
+    <%= f.submit :Submit %>
+  </p>
+  <% end %>
+</div>
