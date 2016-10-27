@@ -1,5 +1,5 @@
 
-task :create [:arg1, :arg2] do |username, password|
+task :create do |username, password|
   puts username
   puts password
   #db = SQLite3::Database.new "db/development.sqlite3"
