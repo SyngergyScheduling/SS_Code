@@ -1,6 +1,7 @@
 class LoginController < ApplicationController
   def login
-    @fail ||= false
+    puts session[:login_fail]
+    session[:login_fail] ||= false
   end
 
   def submit
@@ -11,6 +12,7 @@ class LoginController < ApplicationController
       session[:user_id] = ref.id
       redirect_to '/'
     else
+      session[:login_fail] = true
       redirect_to '/login'
     end
   end
