@@ -3,8 +3,8 @@
 </div>
 <%= render 'shared/navigation' %>
 <div id=login>
-  <% if @fail %>
-    <p>Invalid username or password</p>
+  <% if session[:login_fail] %>
+    <p style="color:white">Invalid username or password</p>
   <% end %>
   <%= form_for :login, url: {action: 'submit'} do |f| %>
     <%= f.label :username %><br>
