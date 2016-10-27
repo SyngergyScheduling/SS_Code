@@ -8,7 +8,7 @@
 </div>
 
 <div id=title>
-  <%= form_for :scoring do |f| %>
+  <%= form_for :scoring, url: '/team_scoring/score' do |f| %>
   <p>
     <%= f.label :Team1 %>
     <%= f.text_field :Team %>
