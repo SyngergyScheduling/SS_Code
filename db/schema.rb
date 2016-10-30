@@ -10,15 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027063010) do
-
-  create_table "members", force: :cascade do |t|
-    t.integer  "teams_id"
-    t.text     "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["teams_id"], name: "index_members_on_teams_id"
-  end
+ActiveRecord::Schema.define(version: 20161026011513) do
 
   create_table "referees", force: :cascade do |t|
     t.text     "username"
@@ -31,6 +23,7 @@ ActiveRecord::Schema.define(version: 20161027063010) do
 
   create_table "teams", force: :cascade do |t|
     t.text     "name",       limit: 32, null: false
+    t.text     "captain",    limit: 32
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.index ["name"], name: "index_teams_on_name", unique: true
