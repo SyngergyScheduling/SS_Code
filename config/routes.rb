@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   get '/team_scoring/teamScoring'
   post 'team_scoring/score'
   root 'home#index'
+
+  get 'league/create'
+  post 'league/create' => 'league#submit'
 end

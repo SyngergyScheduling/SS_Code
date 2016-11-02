@@ -1,0 +1,23 @@
+<div id=title>
+  <h1>Synergy Scheduling</h1>
+</div>
+<%= render "shared/navigation" %>
+
+<div class=form>
+  <%=form_for :league do |f| %>
+    <div id='names'>
+      <h4>Teams</h4>
+      <% 10.times do |i| %>
+        <div class="entry">
+        <%= f.text_field("team#{i}") %><br>
+        </div>
+      <% end %>
+    </div>
+    <div id='start_date'>
+      <%= f.label('start date:') %>
+      <%= date_select :start_date, :start %>
+    </div>
+    <%= f.submit :submit %>
+  <% end %>
+  <div>
+</div>
