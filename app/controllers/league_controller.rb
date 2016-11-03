@@ -6,8 +6,6 @@ class LeagueController < ApplicationController
   def submit
     teams = []
     team_ids = []
-    leauge_info = params['league']
-    puts params['league']
     session['error'] = []
     error = false
     count = 0
@@ -27,15 +25,10 @@ class LeagueController < ApplicationController
       end
     end
     league_schedule = schedule(team_ids)
-    # debug printing
-    league_schedule.each do |item|
-      print("[")
-      item.each do |sid|
-        print(" #{sid} ")
-      end
-      puts "]"
-    end
     league_schedule.each do |day|
+      day.each do |pair|
+        Schedule.new('team1_id': pair[0], 'team2_id': pair[1]).save
+      end
     end
     if error
       redirect_to league_create_url
@@ -44,7 +37,6 @@ class LeagueController < ApplicationController
     session['error'] = nil
     redirect_to '/'
   end
-  
   def schedule(teams)
     days = []
     teams << nil if teams.size % 2 != 0
