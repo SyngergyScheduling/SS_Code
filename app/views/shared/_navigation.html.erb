@@ -1,11 +1,21 @@
+<% logged_in = false %>
+<% unless session[:user_id].nil? %>
+  <% logged_in = true %>
+  <% unless Referee.find_by(id: session[:user_id]).nil? %>
+    <% level = Referee.find_by(id: session[:user_id]).level %>
+  <% end %>
+<% end %>
 <div id='navigation'>
   <ul>
     <li><%= link_to "Home", controller: "home", action: "index" %></li>
     <li><%= link_to "Teams", controller: 'teams', action: 'all' %></li>
-    <% if session[:user_id].nil? %>
-      <li><%= link_to "Login", controller: "login", action: "login" %></li>
-    <% else %>
+    <% if logged_in %>
+      <% if level.eql? 1 %>
+        <li><%= link_to "League", controller: 'league', 'action': 'create' %> </li>
+      <% end %>
       <li><%= link_to "Log Out", controller: "login", action: "logout" %></li>
+    <% else %>
+      <li><%= link_to "Login", controller: "login", action: "login" %></li>
     <% end %>
   </ul>
 </div>

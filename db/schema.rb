@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026011513) do
+ActiveRecord::Schema.define(version: 20161103070814) do
 
   create_table "referees", force: :cascade do |t|
     t.text     "username"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 20161026011513) do
     t.datetime "updated_at",      null: false
     t.integer  "level"
     t.index ["username"], name: "index_referees_on_username", unique: true
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer  "team1_id"
+    t.integer  "team2_id"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teams", force: :cascade do |t|
