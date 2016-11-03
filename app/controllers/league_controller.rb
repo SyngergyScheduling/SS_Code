@@ -1,16 +1,42 @@
 class LeagueController < ApplicationController
   def create
+    if session.nil?
+      redirect_to '/'
+      return
+    end
+    if session[:user_id].nil?
+      redirect_to '/'
+      return
+    end
+    ref = Referee.find_by(id: session[:user_id])
+    if ref.nil?
+      redirect_to '/'
+      return
+    end
+    unless ref.level.eql? 1
+      redirect_to '/'
+      return
+    end
+
     session['error'] ||= []
   end
 
   def submit
     teams = []
     team_ids = []
-    leauge_info = params['league']
-    puts params['league']
     session['error'] = []
     error = false
     count = 0
+    sd = params['start_date']
+    year =  sd['start(1i)'].to_i
+    month =  sd['start(2i)'].to_i
+    day =  sd['start(3i)'].to_i
+    start_date = DateTime.new(year, month, day)
+    unless start_date.wday.eql? 6
+      session['error'] << 'date is not a saturday'
+      redirect_to league_create_url
+      return
+    end
     params['league'].each do |key, value|
       if count.eql? 10
         render "Error!"
@@ -27,15 +53,11 @@ class LeagueController < ApplicationController
       end
     end
     league_schedule = schedule(team_ids)
-    # debug printing
-    league_schedule.each do |item|
-      print("[")
-      item.each do |sid|
-        print(" #{sid} ")
-      end
-      puts "]"
-    end
     league_schedule.each do |day|
+      day.each do |pair|
+        Schedule.new('team1_id': pair[0], 'team2_id': pair[1], date: start_date).save
+	start_date += 7
+      end
     end
     if error
       redirect_to league_create_url
@@ -44,7 +66,6 @@ class LeagueController < ApplicationController
     session['error'] = nil
     redirect_to '/'
   end
-  
   def schedule(teams)
     days = []
     teams << nil if teams.size % 2 != 0
