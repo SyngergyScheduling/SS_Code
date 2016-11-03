@@ -1,5 +1,23 @@
 class LeagueController < ApplicationController
   def create
+    if session.nil?
+      redirect_to '/'
+      return
+    end
+    if session[:user_id].nil?
+      redirect_to '/'
+      return
+    end
+    ref = Referee.find_by(id: session[:user_id])
+    if ref.nil?
+      redirect_to '/'
+      return
+    end
+    unless ref.level.eql? 1
+      redirect_to '/'
+      return
+    end
+
     session['error'] ||= []
   end
 
