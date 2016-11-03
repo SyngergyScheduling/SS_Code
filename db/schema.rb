@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20161103070814) do
   create_table "schedules", force: :cascade do |t|
     t.integer  "team1_id"
     t.integer  "team2_id"
+    t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

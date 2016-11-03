@@ -9,6 +9,16 @@ class LeagueController < ApplicationController
     session['error'] = []
     error = false
     count = 0
+    sd = params['start_date']
+    year =  sd['start(1i)'].to_i
+    month =  sd['start(2i)'].to_i
+    day =  sd['start(3i)'].to_i
+    start_date = DateTime.new(year, month, day)
+    unless start_date.wday.eql? 6
+      session['error'] << 'date is not a saturday'
+      redirect_to league_create_url
+      return
+    end
     params['league'].each do |key, value|
       if count.eql? 10
         render "Error!"
@@ -27,7 +37,8 @@ class LeagueController < ApplicationController
     league_schedule = schedule(team_ids)
     league_schedule.each do |day|
       day.each do |pair|
-        Schedule.new('team1_id': pair[0], 'team2_id': pair[1]).save
+        Schedule.new('team1_id': pair[0], 'team2_id': pair[1], date: start_date).save
+	start_date += 7
       end
     end
     if error

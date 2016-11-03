@@ -1,7 +1,9 @@
 <% logged_in = false %>
 <% unless session[:user_id].nil? %>
   <% logged_in = true %>
-  <% level = Referee.find_by(id: session[:user_id]).level %>
+  <% unless Referee.find_by(id: session[:user_id]).nil? %>
+    <% level = Referee.find_by(id: session[:user_id]).level %>
+  <% end %>
 <% end %>
 <div id='navigation'>
   <ul>
