@@ -1,8 +1,14 @@
+<% require 'set' %>
+<% dates = Set.new %>
+<% Schedule.all.each do |match| %>
+  <% dates << match.date %>
+<% end %>
 
 <ul class="tab">
   <li><a href="javascript:void(0)" class="tablinks" onclick="openWeek(event, 'Week 1')" id="defaultOpen">Week 1</a></li>
-  <li><a href="javascript:void(0)" class="tablinks" onclick="openWeek(event, 'Week 2')">Week 2</a></li>
-  <li><a href="javascript:void(0)" class="tablinks" onclick="openWeek(event, 'Week 3')">Week 3</a></li>
+  <% (dates.size - 1).times do |i| %>
+    <li><a href="javascript:void(0)" class="tablinks" onclick="openWeek(event, 'Week <%= i + 2 %>')">Week <%=i+2%></a></li>
+  <% end %>
 </ul>
 
 <body>
