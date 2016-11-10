@@ -4,23 +4,45 @@
 <%= render 'shared/navigation' %>
 
 <div id=match>
-  <h1>Scores for Team1 vs. Team2</h1>
+  <h1>Scores for Team 1 vs. Team 2</h1>
 </div>
 
 <div id=title>
   <%= form_for :scoring, url: '/team_scoring/score' do |f| %>
-  <p>
-    <%= f.label :Team1 %>
-    <%= f.select :Team, [0,1,2,3,4,5,6,7,8,9,10] %>
+      <p>
+      <table style="width:100%">
+          <tr>
+            <th>Criteria</th>
+            <th>Team 1</th>
+            <th>Team 2</th>
+          </tr>
+        <tr>
+          <td>Style</td>
+          <td><%= f.select :'Team1-Style', [0,1,2,3,4,5] %></td>
+          <td><%= f.select :'Team2-Style', [0,1,2,3,4,5] %></td>
+        </tr>
+        <tr>
+          <td>Presentation</td>
+          <td><%= f.select :'Team1-Presentation', [0,1,2,3,4,5] %></td>
+          <td><%= f.select :'Team2-Presentation', [0,1,2,3,4,5] %></td>
+        </tr>
+        <tr>
+          <td>Understanding of Question</td>
+          <td><%= f.select :'Team1-Understanding', [0,1,2,3,4,5] %></td>
+          <td><%= f.select :'Team2-Understanding', [0,1,2,3,4,5] %></td>
+        </tr>
+        <tr>
+          <td>Response</td>
+          <td><%= f.select :'Team1-Response', [0,1,2,3,4,5] %></td>
+          <td><%= f.select :'Team2-Response', [0,1,2,3,4,5] %></td>
+        </tr>
+      </table>
 
-  
+      </p>
 
-    <%= f.label :Team2 %>
-    <%= f.select :Team, [0,1,2,3,4,5,6,7,8,9,10] %>
-  </p>
-  
-  <p>
-    <%= f.submit :Submit %>
-  </p>
+
+      <p>
+        <%= f.submit :Submit %>
+      </p>
   <% end %>
 </div>
