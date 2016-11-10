@@ -4,7 +4,7 @@
 <%= render 'shared/navigation' %>
 
 <div id=match>
-  <h1>Scores for Team 1 vs. Team 2</h1>
+  <h1>Scores for <%= @team1.name %> vs. <%= @team2.name %></h1>
 </div>
 
 <div id=title>
@@ -13,8 +13,8 @@
       <table style="width:100%">
           <tr>
             <th>Criteria</th>
-            <th>Team 1</th>
-            <th>Team 2</th>
+            <th><%= @team1.name %></th>
+            <th><%= @team2.name %></th>
           </tr>
         <tr>
           <td>Style</td>
@@ -42,7 +42,7 @@
 
 
       <p>
-        <%= f.submit :Submit %>
+        <%= f.submit :Submit, :params => {'t1' => @team1, 't2' => @team2} %>
       </p>
   <% end %>
 </div>
