@@ -56,8 +56,8 @@ class LeagueController < ApplicationController
     league_schedule.each do |day|
       day.each do |pair|
         Schedule.new('team1_id': pair[0], 'team2_id': pair[1], date: start_date).save
-	start_date += 7
       end
+      start_date += 7
     end
     if error
       redirect_to league_create_url
