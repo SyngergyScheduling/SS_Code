@@ -3,6 +3,6 @@ class Team < ApplicationRecord
   after_initialize :init
   
   def init
-    Team.score ||= 0
+    self.score ||= 0
   end
 end
