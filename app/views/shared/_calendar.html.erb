@@ -26,7 +26,7 @@
 	  <td>Georgia Bulldogs</td>
 	  <td>Georgia Tech Yellow Jackets</td>
 	  <td>October 21, 2016</td>
-	  <% if session[:user_id].nil? %>
+          <% if session[:user_id].nil? %>
 	  <% else %>
 	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
 	  <% end %>
