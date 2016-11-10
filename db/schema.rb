@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20161103070814) do
   create_table "teams", force: :cascade do |t|
     t.text     "name",       limit: 32, null: false
     t.text     "captain",    limit: 32
+    t.integer  "score"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.index ["name"], name: "index_teams_on_name", unique: true
