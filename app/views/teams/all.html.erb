@@ -3,11 +3,18 @@
 </div>
 
 <%= render "shared/navigation" %>
-<% teams = Team.order(id: :asc).pluck(:name) %>
+<% teams = Team.order(id: :asc).pluck(:name, :captain, :score) %>
 
 <table>
+  <tr>
+    <td>Teams</td>
+    <td>Captains</td>
+    <td>Scores</td>
+  </tr>
   <% teams.each do|f| %>
   <tr>
-    <td><%=f%></td>
+    <td><%=f[0]%></td>
+    <td><%=f[1]%></td>
+    <td><%=f[3]%></td>
   </tr>
   <%end%>
