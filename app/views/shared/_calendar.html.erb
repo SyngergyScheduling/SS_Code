@@ -39,7 +39,7 @@
 	    </td> 
 	    <% unless session[:user_id].nil? %>
 	      <td>
-	      <%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get, :params => {'id1': match.team1_id, 'id2': match.team2_id}%>
+	      <%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get, :params => {'id1': match.team1_id, 'id2': match.team2_id, 'match': match.id}%>
 	      </td>
 	    <% end %>
 	    </tr>
