@@ -27,6 +27,7 @@ class TeamScoringController < ApplicationController
     @match.update(team1_score: team1)
     @match.update(team2_score: team2)
     @match.save
+	@match.update(previously_scored: 1)
     redirect_to teams_all_url
   end
 end

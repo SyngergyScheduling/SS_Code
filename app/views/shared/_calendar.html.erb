@@ -4,6 +4,16 @@
   <% dates << match.date %>
 <% end %>
 
+
+
+<% logged_in = false %>
+<% unless session[:user_id].nil? %>
+  <% logged_in = true %>
+  <% unless Referee.find_by(id: session[:user_id]).nil? %>
+    <% level = Referee.find_by(id: session[:user_id]).level %>
+  <% end %>
+<% end %>
+
 <ul class="tab">
   <% if dates.size > 0 %>
     <li><a href="javascript:void(0)" class="tablinks" onclick="openWeek(event, 'Week 1')" id="defaultOpen">Week 1</a></li>
@@ -37,10 +47,15 @@
 	    <td>
 	    <%= "#{date.month}/#{date.day}/#{date.year}" %>
 	    </td> 
-	    <% unless session[:user_id].nil? %>
+	    <% if session[:user_id].nil?  %>
+		<% elsif match.previously_scored.nil? %>
 	      <td>
 	      <%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get, :params => {'id1': match.team1_id, 'id2': match.team2_id, 'match': match.id}%>
 	      </td>
+		<% elsif match.previously_scored.eql? 1 and level.eql? 1 %>
+		  <td>
+		  <%= button_to "edit score", team_scoring_teamScoring_path, :class => "button", :method => :get, :params => {'id1': match.team1_id, 'id2': match.team2_id, 'match': match.id}%>
+		  </td>
 	    <% end %>
 	    </tr>
 	  <% end %>
