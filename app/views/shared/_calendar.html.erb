@@ -29,7 +29,9 @@
     <table>
       <tr>
         <th> Team 1</th>
+		<th> Team 1 Score</th>
 	<th> Team 2</th>
+	<th> Team 2 Score</th>
 	<th> Date  </th>
       </tr>
 	<% Schedule.where(date: date).each do |match| %>
@@ -39,14 +41,25 @@
 	    <td>
 	    <%= Team.where(id: match.team1_id).pluck('name')[0] %>
 	    </td>
+			<!-- team 1 score -->
+		<td>
+		<%= match.team1_score %>
+		</td>
             <!-- team2 -->
 	    <td>
 	    <%= Team.where(id: match.team2_id).pluck('name')[0] %>
 	    </td> 
+			<!-- team 2 score -->
+		<td>
+		<%= match.team2_score %>
+		</td>
             <!-- date -->
 	    <td>
 	    <%= "#{date.month}/#{date.day}/#{date.year}" %>
 	    </td> 
+			<!-- scores -->
+		<td>
+		
 	    <% if session[:user_id].nil?  %>
 		<% elsif match.previously_scored.nil? %>
 	      <td>
@@ -57,6 +70,7 @@
 		  <%= button_to "edit score", team_scoring_teamScoring_path, :class => "button", :method => :get, :params => {'id1': match.team1_id, 'id2': match.team2_id, 'match': match.id}%>
 		  </td>
 	    <% end %>
+		
 	    </tr>
 	  <% end %>
 	<% end %>
