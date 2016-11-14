@@ -1,11 +1,13 @@
 <% logged_in = false %>
+<% min_width = 800 %>
 <% unless session[:user_id].nil? %>
   <% logged_in = true %>
   <% unless Referee.find_by(id: session[:user_id]).nil? %>
     <% level = Referee.find_by(id: session[:user_id]).level %>
+    <% min_width = 1000 if level.eql? 1 %>
   <% end %>
 <% end %>
-<div id='navigation'>
+<div style='min-width:<%= min_width %>px;' id='navigation'>
   <ul>
     <li><%= link_to "Home", controller: "home", action: "index" %></li>
     <li><%= link_to "Teams", controller: 'teams', action: 'all' %></li>
