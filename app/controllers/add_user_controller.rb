@@ -1,5 +1,14 @@
 class AddUserController < ApplicationController
 def add
+	unless session[:user_id].nil? 
+	  logged_in = true 
+	  unless Referee.find_by(id: session[:user_id]).nil?
+      level = Referee.find_by(id: session[:user_id]).level
+	  end 
+	end
+	unless level.eql? 1
+      redirect_to '/'
+    end
     puts session[:username_taken]
 	puts session[:created]
     session[:username_taken] ||= false
