@@ -1,0 +1,22 @@
+<div id=title>
+  <h1>Synergy Scheduling</h1>
+</div>
+<%= render 'shared/navigation' %>
+
+<div id=login class=form>
+  <% if session[:username_taken] %>
+    <p style="color:white">Username already exists</p>
+	<% session[:username_taken] = false %>
+  <% end %>
+  <% if session[:created] %>
+    <p style="color:white">User successfully created</p>
+	<% session[:created] = false %>
+  <% end %>
+  <%= form_for :new, url: {action: 'submit'} do |f| %>
+    <%= f.label :username %><br>
+    <%= f.text_field :username %><br>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %><br>
+    <%= f.submit :new %>
+  <% end %>
+</div>
