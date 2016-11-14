@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get 'league/create'
   post 'league/create' => 'league#submit'
+  get 'league/modify'
+  post 'league/modify'
   
   get 'add_user/add'
   post'add_user/add'
