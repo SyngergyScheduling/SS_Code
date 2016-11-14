@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161113231101) do
+ActiveRecord::Schema.define(version: 20161113234213) do
 
   create_table "referees", force: :cascade do |t|
     t.text     "username"
@@ -25,10 +25,11 @@ ActiveRecord::Schema.define(version: 20161113231101) do
     t.integer  "team1_id"
     t.integer  "team2_id"
     t.datetime "date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "team1_score"
     t.integer  "team2_score"
+    t.integer  "previously_scored"
   end
 
   create_table "teams", force: :cascade do |t|
