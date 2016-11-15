@@ -1,24 +1,34 @@
 <% logged_in = false %>
+<% min_width = 800 %>
 <% unless session[:user_id].nil? %>
   <% logged_in = true %>
   <% unless Referee.find_by(id: session[:user_id]).nil? %>
     <% level = Referee.find_by(id: session[:user_id]).level %>
+    <% min_width = 1000 if level.eql? 1 %>
   <% end %>
 <% end %>
-<div id='navigation'>
+<div style='min-width:<%= min_width %>px;' id='navigation'>
   <ul>
     <li><%= link_to "Home", controller: "home", action: "index" %></li>
     <li><%= link_to "Teams", controller: 'teams', action: 'all' %></li>
     <% if logged_in %>
       <% if level.eql? 1 %>
-        <li><%= link_to "League", controller: 'league', 'action': 'create' %> </li>
+        <li>
+	  <%= link_to "League", controller: 'league', 'action': 'create' %> 
+	</li>
       <% end %>
 	  <% if level.eql? 1%>
-	    <li><%= link_to "Create User", controller: 'add_user', 'action': 'add' %></li>
+	    <li>
+              <%= link_to "Create User", controller: 'add_user', 'action': 'add' %>
+	    </li>
 	  <% end %>
-      <li><%= link_to "Log Out", controller: "login", action: "logout" %></li>
+      <li>
+        <%= link_to "Log Out", controller: "login", action: "logout" %>
+      </li>
     <% else %>
-      <li><%= link_to "Login", controller: "login", action: "login" %></li>
+      <li>
+        <%= link_to "Login", controller: "login", action: "login" %>
+      </li>
     <% end %>
   </ul>
 </div>
