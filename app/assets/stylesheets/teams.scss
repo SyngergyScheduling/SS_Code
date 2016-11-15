@@ -8,6 +8,8 @@ table {
   font-family: arial, sans-serif;
   bord-collapse: collapse;
   width: 100%;
+  padding-left: 3%;
+  padding-right: 3%;
 }
 
 h3 {
@@ -15,9 +17,9 @@ h3 {
   text-align: center;
 }
 
-td, th	{
+td, th        {
   bord: 1px solid #dddddd;
-  text-align: left;
+  text-align: center;
   padding: 8px;
   color: #ffffff;
 }
@@ -28,7 +30,7 @@ ul.tab {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  border: 1px solid #ccc;	
+  border: 1px solid #ccc;        
   background-color: #6B7B96;
 }
 

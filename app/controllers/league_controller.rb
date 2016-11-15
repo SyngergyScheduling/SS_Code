@@ -17,8 +17,29 @@ class LeagueController < ApplicationController
       redirect_to '/'
       return
     end
+    if Team.all.size > 0
+      redirect_to league_modify_url
+      return
+    end
 
     session['error'] ||= []
+  end
+
+  def reschedule
+    if request.post?
+    end
+  end
+
+  def modify
+    if request.post?
+      Team.all.each_with_index do |team, i|
+        unless team.name.eql? params['change']["team#{i}"]
+          team.name = params['change']["team #{i}"]
+          team.save
+        end
+      end
+      redirect_to teams_all_url
+    end
   end
 
   def submit
@@ -44,12 +65,12 @@ class LeagueController < ApplicationController
       unless value.eql? ""
         teams << Team.new('name': value)
         begin
-	  teams[-1].save
-	  team_ids << teams[-1].id
-	rescue  ActiveRecord::RecordNotUnique
-	  session['error'] << "Team #{value} already exists"
-	  error = true
-	end
+          teams[-1].save
+          team_ids << teams[-1].id
+        rescue  ActiveRecord::RecordNotUnique
+          session['error'] << "Team #{value} already exists"
+          error = true
+        end
       end
     end
     league_schedule = schedule(team_ids)

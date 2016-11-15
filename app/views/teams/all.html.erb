@@ -3,11 +3,26 @@
 </div>
 
 <%= render "shared/navigation" %>
-<% teams = Team.order(id: :asc).pluck(:name) %>
+<% teams = Team.order(id: :asc).pluck(:name, :id, :score) %>
+<% teams.each do |f| %>
+  <% @team = Team.find_by(id: f[1]) %>
+  <% teamscore1 = Schedule.where(team1_id: f[1]).sum(:team1_score) %>
+  <% teamscore2 = Schedule.where(team2_id: f[1]).sum(:team2_score) %>
+  <% @team.update(score: teamscore1+teamscore2) %>
+<%end%>
+
+
 
 <table>
+  <%teams = Team.order(score: :desc).pluck(:name, :score) %>
+  <tr>
+    <td>Teams</td>
+    <!--<td>Captains</td>-->
+    <td>Scores</td>
+  </tr>
   <% teams.each do|f| %>
   <tr>
-    <td><%=f%></td>
+    <td><%= f[0] %></td>
+    <td><%= f[1] %></td>
   </tr>
   <%end%>
