@@ -1,9 +1,13 @@
+<!-- Because this is a shared html file, the logic must be self contained -->
+<!-- We made a decision to break best practice with this bit of code and  -->
+<!-- are including logic in this html file using embeded ruby.            -->
+
 <% require 'set' %>
 <% dates = Set.new %>
 <% Schedule.all.each do |match| %>
   <% dates << match.date %>
 <% end %>
-
+<% today = DateTime.now %>
 
 
 <% logged_in = false %>
@@ -15,12 +19,15 @@
 <% end %>
 
 <ul class="tab">
-  <% default = 'defaultOpen' %>
+  <% previous_day = DateTime.new %>
   <% dates.each do |date| %>
     <% formated_date = "#{date.month}/#{date.day}/#{date.year}" %>
+      <% default = '' %>
+    <% if previous_day < today and date >= today %>
+      <% default = 'defaultOpen' %>
+    <% end %>
     <li><a href="javascript:void(0)" id = '<%= default %>' class="tablinks" onclick="openWeek(event, 
     '<%= formated_date %>')"><%= formated_date %></a></li>
-    <% default = '' %>
   <% end %>
 </ul>
 
