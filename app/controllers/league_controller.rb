@@ -25,6 +25,11 @@ class LeagueController < ApplicationController
     session['error'] ||= []
   end
 
+  def reschedule
+    if request.post?
+    end
+  end
+
   def modify
     if request.post?
       Team.all.each_with_index do |team, i|
