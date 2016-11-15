@@ -41,36 +41,36 @@
             <td>
             <%= Team.where(id: match.team1_id).pluck('name')[0] %>
             </td>
-        		<!-- team 1 score -->
-        	<td>
-        	<%= match.team1_score %>
-        	</td>
+                        <!-- team 1 score -->
+                <td>
+                <%= match.team1_score %>
+                </td>
             <!-- team2 -->
             <td>
             <%= Team.where(id: match.team2_id).pluck('name')[0] %>
             </td> 
-        		<!-- team 2 score -->
-        	<td>
-        	<%= match.team2_score %>
-        	</td>
+                        <!-- team 2 score -->
+                <td>
+                <%= match.team2_score %>
+                </td>
             <!-- date -->
             <td>
             <%= "#{date.month}/#{date.day}/#{date.year}" %>
             </td> 
-        		<!-- scores -->
-        	<td>
-        	
+                        <!-- scores -->
+                <td>
+                
             <% if session[:user_id].nil?  %>
-        	<% elsif match.previously_scored.nil? %>
+                <% elsif match.previously_scored.nil? %>
               <td>
               <%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get, :params => {'id1': match.team1_id, 'id2': match.team2_id, 'match': match.id}%>
               </td>
-        	<% elsif match.previously_scored.eql? 1 and level.eql? 1 %>
-        	  <td>
-        	  <%= button_to "edit score", team_scoring_teamScoring_path, :class => "button", :method => :get, :params => {'id1': match.team1_id, 'id2': match.team2_id, 'match': match.id}%>
-        	  </td>
+                <% elsif match.previously_scored.eql? 1 and level.eql? 1 %>
+                  <td>
+                  <%= button_to "edit score", team_scoring_teamScoring_path, :class => "button", :method => :get, :params => {'id1': match.team1_id, 'id2': match.team2_id, 'match': match.id}%>
+                  </td>
             <% end %>
-        	
+                
             </tr>
           <% end %>
         <% end %>

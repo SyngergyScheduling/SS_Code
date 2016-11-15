@@ -30,8 +30,8 @@ class LeagueController < ApplicationController
       Team.all.each_with_index do |team, i|
         unless team.name.eql? params['change']["team#{i}"]
           team.name = params['change']["team #{i}"]
-	  team.save
-	end
+          team.save
+        end
       end
       redirect_to teams_all_url
     end
