@@ -12,18 +12,17 @@
     <div id='names'>
       <h4>Teams</h4>
     </div>
-    <div id='tbfunction'>
-      <button onClick='addBox()'>Add</button>
-    </div>
     <div id='start_date'>
       <%= f.label('start date:') %>
       <%= date_select :start_date, :start %>
     </div>
     <%= f.submit :submit %>
   <% end %>
+  <button onClick=addBox()>Add Field</button>
+  <button onClick=removeBox()>Add Field</button>
   <div>
 </div>
 
 <script>
-  document.getElementById('names').appendChild(genDiv());
+  addBox();
 </script>

@@ -1,0 +1,14 @@
+<div id=title>
+  <h1>Synergy Scheduling</h1>
+</div>
+<%= render "shared/navigation" %>
+
+<div class=form>
+  <h2>Change Team Names</h2>
+  <%= form_for :change do |f| %>
+    <% Team.all.each_with_index do |team, i| %>
+      <%= f.text_field "team #{i}", value: team.name %><br>
+    <% end %>
+    <%= f.submit :save %>
+  <% end %>
+</div>

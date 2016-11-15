@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103070814) do
+ActiveRecord::Schema.define(version: 20161114002825) do
 
   create_table "referees", force: :cascade do |t|
     t.text     "username"
@@ -25,13 +25,25 @@ ActiveRecord::Schema.define(version: 20161103070814) do
     t.integer  "team1_id"
     t.integer  "team2_id"
     t.datetime "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "team1_score"
+    t.integer  "team2_score"
+    t.integer  "previously_scored"
+    t.integer  "team1_style"
+    t.integer  "team2_style"
+    t.integer  "team1_presentation"
+    t.integer  "team2_presentation"
+    t.integer  "team1_understanding"
+    t.integer  "team2_understanding"
+    t.integer  "team1_response"
+    t.integer  "team2_response"
   end
 
   create_table "teams", force: :cascade do |t|
     t.text     "name",       limit: 32, null: false
     t.text     "captain",    limit: 32
+    t.integer  "score"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.index ["name"], name: "index_teams_on_name", unique: true

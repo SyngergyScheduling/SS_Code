@@ -1,148 +1,109 @@
+<!-- Because this is a shared html file, the logic must be self contained -->
+<!-- We made a decision to break best practice with this bit of code and  -->
+<!-- are including logic in this html file using embeded ruby.            -->
+
+<% require 'set' %>
+<% dates = Set.new %>
+<% Schedule.all.each do |match| %>
+  <% dates << match.date %>
+<% end %>
+<% today = DateTime.now %>
+
+
+<% logged_in = false %>
+<% unless session[:user_id].nil? %>
+  <% logged_in = true %>
+  <% unless Referee.find_by(id: session[:user_id]).nil? %>
+    <% level = Referee.find_by(id: session[:user_id]).level %>
+  <% end %>
+<% end %>
 
 <ul class="tab">
-  <li><a href="javascript:void(0)" class="tablinks" onclick="openWeek(event, 'Week 1')" id="defaultOpen">Week 1</a></li>
-  <li><a href="javascript:void(0)" class="tablinks" onclick="openWeek(event, 'Week 2')">Week 2</a></li>
-  <li><a href="javascript:void(0)" class="tablinks" onclick="openWeek(event, 'Week 3')">Week 3</a></li>
+  <% previous_day = DateTime.new %>
+  <% dates.each do |date| %>
+    <% formated_date = "#{date.month}/#{date.day}/#{date.year}" %>
+      <% default = '' %>
+    <% if previous_day < today and date >= today %>
+      <% default = 'defaultOpen' %>
+    <% end %>
+    <li><a href="javascript:void(0)" id = '<%= default %>' class="tablinks" onclick="openWeek(event, 
+    '<%= formated_date %>')"><%= formated_date %></a></li>
+  <% end %>
 </ul>
 
 <body>
-<div id="Week 1" class = "tabcontent">
-  <table>
-	<tr>
-      <th>Team 1</th>
-	  <th>Team 2</th>
-	  <th>Date</th>
-	</tr>
-	<tr>
-	  <td>Kennesaw State Owls</td>
-	  <td>Georgia State Panthers</td>
-	  <td>October 21, 2016</td>
-	  <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-	<tr>
-	  <td>Georgia Bulldogs</td>
-	  <td>Georgia Tech Yellow Jackets</td>
-	  <td>October 21, 2016</td>
-          <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-	<tr>
-	  <td>West Georgia</td>
-	  <td>Columbus State</td>
-	  <td>October 21, 2016</td>
-	  <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-	<tr>
-	  <td>GCSU</td>
-	  <td>Middle Georgia College</td>
-	  <td>October 21, 2016</td>
-	  <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-  </table>
-</div>
-
-<div id="Week 2" class = "tabcontent">
-  <table>
-	<tr>
-	  <th>Team 1</th>
-	  <th>Team 2</th>
-	  <th>Date</th>
-	</tr>
-	<tr>
-	  <td>Kennesaw State Owls</td>
-	  <td>Georgia Bulldogs</td>
-	  <td>October 28, 2016</td>
-	  <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-	<tr>
-	  <td>Georgia State Panthers</td>
-	  <td>Georgia Tech Yellow Jackets</td>
-	  <td>October 28, 2016</td>
-	  <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-	<tr>
-	  <td>GCSU</td>
-	  <td>Columbus State</td>
-	  <td>October 28, 2016</td>
-	  <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-	<tr>
-	  <td>West Georgia</td>
-	  <td>Middle Georgia College</td>
-	  <td>October 28, 2016</td>
-	  <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-  </table>
-</div>
-
-<div id="Week 3" class = "tabcontent">
-  <table>
-	<tr>
-	  <th>Team 1</th>
-	  <th>Team 2</th>
-	  <th>Date</th>
-	</tr>
-	<tr>
-	  <td>GCSU</td>
-	  <td>Georgia State Panthers</td>
-	  <td>November 4, 2016</td>
-	  <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-	<tr>
-	  <td>Kennesaw State Owls</td>
-	  <td>Georgia Tech Yellow Jackets</td>
-	  <td>November 4, 2016</td>
-	  <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-	<tr>
-	  <td>Georgia Bulldogs</td>
-	  <td>Columbus State</td>
-	  <td>November 4, 2016</td>
-	  <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-	<tr>
-	  <td>Kennesaw State University</td>
-	  <td>Middle Georgia College</td>
-	  <td>November 4, 2016</td>
-	  <% if session[:user_id].nil? %>
-	  <% else %>
-	    <td><%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%></td>
-	  <% end %>
-	</tr>
-  </table>
-</div>
+<% dates.each_with_index do |date, i| %>
+  <% formated_date = "#{date.month}/#{date.day}/#{date.year}" %>
+  <div id=<%= formated_date %> class="tabcontent">
+    <table>
+      <tr>
+        <th> Team 1</th>
+        <th> Team 1 Score</th>
+        <th> Team 2</th>
+        <th> Team 2 Score</th>
+      </tr>
+        <% Schedule.where(date: date).each do |match| %>
+          <% unless match.team1_id.nil? or match.team2_id.nil? %>
+            <tr>
+            <!-- team 1 -->
+            <td>
+              <%= Team.where(id: match.team1_id).pluck('name')[0] %>
+            </td>
+            <!-- team 1 score -->
+            <td>
+              <%= match.team1_score %>
+            </td>
+            <!-- team2 -->
+            <td>
+              <%= Team.where(id: match.team2_id).pluck('name')[0] %>
+            </td> 
+            <!-- team 2 score -->
+            <td>
+              <%= match.team2_score %>
+            </td> 
+            <!-- score button -->
+            <% unless session[:user_id].nil?  %>
+              <% value = "score" %>
+              <% disabled = false %>
+              <% if match.previously_scored.eql? 1 %>
+                <% if level.eql? 1 %>
+                  <% value = "edit score" %>
+                <% else %>
+                  <% disable = true %>
+                <% end %>
+              <% end %>
+              <td>
+                <%= button_to(value, 
+                       team_scoring_teamScoring_path, 
+                              :disabled => disable, 
+                              :class => "button", 
+                              :method => :get, 
+                              :params => {
+                                'id1': match.team1_id, 
+                                'id2': match.team2_id, 
+                                'match': match.id
+                              }) %>
+                <% end %>
+              </td>
+              <% if level.eql? 1 %>
+                <td>
+                  <%= button_to("reschedule",
+                                league_reschedule_url,
+                                :method => :get,
+                                :params => {
+                                  'id1': match.team1_id,
+                                  'id2': match.team2_id,
+                                  'match': match.id
+                                })%>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+<% end %>
 <script>
   document.getElementById("defaultOpen").click();
 </script>

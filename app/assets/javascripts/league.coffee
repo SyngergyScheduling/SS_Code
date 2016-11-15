@@ -13,12 +13,17 @@
   button.appendChild(document.createTextNode('-'))
   button.setAttribute('onClick', 'subInput(this.parentElement)')
   button
- 
+
 @genDiv = ->
   div = document.createElement('div')
   div.appendChild(genTF())
-  div.appendChild(genB())
+  #div.appendChild(genB())
   div
 
 @addBox = ->
-  document.getElementById('names').appendChild(genDiv());
+  document.getElementById('names').appendChild(genDiv())
+ 
+@removeBox = ->
+  div = document.getElementById('names')
+  children = div.childNodes
+  div.removeChild(children[children.length - 1])
