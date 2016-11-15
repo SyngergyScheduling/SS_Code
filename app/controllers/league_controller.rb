@@ -28,7 +28,10 @@ class LeagueController < ApplicationController
   def modify
     if request.post?
       Team.all.each_with_index do |team, i|
-        team.name = params['change']["team #{i}"]
+        unless team.name.eql? params['change']["team#{i}"]
+          team.name = params['change']["team #{i}"]
+	  team.save
+	end
       end
       redirect_to teams_all_url
     end
