@@ -19,9 +19,12 @@ Rails.application.routes.draw do
   post 'league/create' => 'league#submit'
   get 'league/modify'
   post 'league/modify'
+  get 'league/reschedule'
+  post  'league/reschedule'
   
   get 'add_user/add'
   post'add_user/add'
   post 'add_user/submit'
   post 'add_user/add/new' => 'add_user#add'
+
 end
