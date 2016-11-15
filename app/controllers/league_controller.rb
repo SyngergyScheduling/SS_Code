@@ -57,12 +57,12 @@ class LeagueController < ApplicationController
       unless value.eql? ""
         teams << Team.new('name': value)
         begin
-	  teams[-1].save
-	  team_ids << teams[-1].id
-	rescue  ActiveRecord::RecordNotUnique
-	  session['error'] << "Team #{value} already exists"
-	  error = true
-	end
+          teams[-1].save
+          team_ids << teams[-1].id
+        rescue  ActiveRecord::RecordNotUnique
+          session['error'] << "Team #{value} already exists"
+          error = true
+        end
       end
     end
     league_schedule = schedule(team_ids)

@@ -19,30 +19,30 @@
     <table>
       <tr>
         <th> Team 1</th>
-	<th> Team 2</th>
-	<th> Date  </th>
+        <th> Team 2</th>
+        <th> Date  </th>
       </tr>
-	<% Schedule.where(date: date).each do |match| %>
-	  <tr>
-	   <!-- team 1 -->
-	  <td>
-	  <%= Team.where(id: match.team1_id).pluck('name')[0] %>
-	  </td>
+        <% Schedule.where(date: date).each do |match| %>
+          <tr>
+           <!-- team 1 -->
+          <td>
+          <%= Team.where(id: match.team1_id).pluck('name')[0] %>
+          </td>
           <!-- team2 -->
-	  <td>
-	  <%= Team.where(id: match.team2_id).pluck('name')[0] %>
-	  </td> 
+          <td>
+          <%= Team.where(id: match.team2_id).pluck('name')[0] %>
+          </td> 
           <!-- date -->
-	  <td>
-	  <%= "#{date.month}/#{date.day}/#{date.year}" %>
-	  </td> 
-	  <% unless session[:user_id].nil? %>
-	    <td>
-	    <%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%>
-	    </td>
-	  <% end %>
-	  </tr>
-	<% end %>
+          <td>
+          <%= "#{date.month}/#{date.day}/#{date.year}" %>
+          </td> 
+          <% unless session[:user_id].nil? %>
+            <td>
+            <%= button_to "score", team_scoring_teamScoring_path, :class => "button", :method => :get%>
+            </td>
+          <% end %>
+          </tr>
+        <% end %>
       </tr>
     </table>
   </div>
