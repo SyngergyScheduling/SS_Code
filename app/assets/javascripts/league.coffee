@@ -26,4 +26,5 @@
 @removeBox = ->
   div = document.getElementById('names')
   children = div.childNodes
-  div.removeChild(children[children.length - 1])
+  if children.length > 0
+    div.removeChild(children[children.length - 1])
