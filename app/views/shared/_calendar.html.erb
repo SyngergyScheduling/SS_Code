@@ -38,43 +38,43 @@
     <table>
       <tr>
         <th> Team 1</th>
-	<th> Team 1 Score</th>
+        <th> Team 1 Score</th>
         <th> Team 2</th>
         <th> Team 2 Score</th>
       </tr>
         <% Schedule.where(date: date).each do |match| %>
           <% unless match.team1_id.nil? or match.team2_id.nil? %>
-	    <tr>
-	     <!-- team 1 -->
-	    <td>
-	      <%= Team.where(id: match.team1_id).pluck('name')[0] %>
-	    </td>
+            <tr>
+            <!-- team 1 -->
+            <td>
+              <%= Team.where(id: match.team1_id).pluck('name')[0] %>
+            </td>
             <!-- team 1 score -->
             <td>
               <%= match.team1_score %>
             </td>
             <!-- team2 -->
-	    <td>
-	      <%= Team.where(id: match.team2_id).pluck('name')[0] %>
-	    </td> 
-	    <!-- team 2 score -->
-	    <td>
+            <td>
+              <%= Team.where(id: match.team2_id).pluck('name')[0] %>
+            </td> 
+            <!-- team 2 score -->
+            <td>
               <%= match.team2_score %>
-	    </td> 
+            </td> 
             <!-- score button -->
-	    <% unless session[:user_id].nil?  %>
-	      <% value = "score" %>
+            <% unless session[:user_id].nil?  %>
+              <% value = "score" %>
               <% disabled = false %>
-	      <% if match.previously_scored.eql? 1 %>
-	        <% if level.eql? 1 %>
-	          <% value = "edit score" %>
-		<% else %>
+              <% if match.previously_scored.eql? 1 %>
+                <% if level.eql? 1 %>
+                  <% value = "edit score" %>
+                <% else %>
                   <% disable = true %>
-		<% end %>
-	      <% end %>
+                <% end %>
+              <% end %>
               <td>
                 <%= button_to(value, 
-	               team_scoring_teamScoring_path, 
+                       team_scoring_teamScoring_path, 
                               :disabled => disable, 
                               :class => "button", 
                               :method => :get, 
@@ -83,23 +83,23 @@
                                 'id2': match.team2_id, 
                                 'match': match.id
                               }) %>
-	        <% end %>
+                <% end %>
               </td>
-	      <% if level.eql? 1 %>
-	        <td>
-	          <%= button_to("reschedule",
-		                league_reschedule_url,
-		                :method => :get,
-				:params => {
-				  'id1': match.team1_id,
-				  'id2': match.team2_id,
-				  'match': match.id
-				})%>
-	        </td>
+              <% if level.eql? 1 %>
+                <td>
+                  <%= button_to("reschedule",
+                                league_reschedule_url,
+                                :method => :get,
+                                :params => {
+                                  'id1': match.team1_id,
+                                  'id2': match.team2_id,
+                                  'match': match.id
+                                })%>
+                </td>
               <% end %>
-	    </tr>
-	  <% end %>
-	<% end %>
+            </tr>
+          <% end %>
+        <% end %>
       </tr>
     </table>
   </div>
