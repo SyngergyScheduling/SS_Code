@@ -35,8 +35,8 @@ class LeagueController < ApplicationController
       Team.all.each_with_index do |team, i|
         unless team.name.eql? params['change']["team#{i}"]
           team.name = params['change']["team #{i}"]
-	  team.save
-	end
+          team.save
+        end
       end
       redirect_to teams_all_url
     end
@@ -65,12 +65,12 @@ class LeagueController < ApplicationController
       unless value.eql? ""
         teams << Team.new('name': value)
         begin
-	  teams[-1].save
-	  team_ids << teams[-1].id
-	rescue  ActiveRecord::RecordNotUnique
-	  session['error'] << "Team #{value} already exists"
-	  error = true
-	end
+          teams[-1].save
+          team_ids << teams[-1].id
+        rescue  ActiveRecord::RecordNotUnique
+          session['error'] << "Team #{value} already exists"
+          error = true
+        end
       end
     end
     league_schedule = schedule(team_ids)
