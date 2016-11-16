@@ -26,5 +26,8 @@
 @removeBox = ->
   div = document.getElementById('names')
   children = div.childNodes
-  if children.length > 0
+# There are some items that are implicitly added
+# to the div, therefore a div with only one text box
+# has 4 children.
+  if children.length > 4
     div.removeChild(children[children.length - 1])
