@@ -17,14 +17,19 @@ class LeagueController < ApplicationController
 
   def modify
     non_ref_redirect
+    cookies['error'] = [] 
+    failed = false
     if request.post?
       Team.all.each_with_index do |team, i|
-        unless team.name.eql? params['change']["team#{i}"]
+        if params['change']["team #{i}"].eql? ''
+          cookies['error'] << "#{team.name} must have a name"
+          failed = true
+        else
           team.name = params['change']["team #{i}"]
           team.save
         end
       end
-      redirect_to teams_all_url
+      redirect_to teams_all_url unless failed
     end
   end
 
