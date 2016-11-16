@@ -5,6 +5,9 @@
 
 <div class=form>
   <h2>Change Team Names</h2>
+  <% cookies['error'].each do |error| %>
+    <p><%= error %></p>
+  <% end %>
   <%= form_for :change do |f| %>
     <% Team.all.each_with_index do |team, i| %>
       <%= f.text_field "team #{i}", value: team.name %><br>
