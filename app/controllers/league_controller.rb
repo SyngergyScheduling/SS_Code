@@ -1,22 +1,6 @@
 class LeagueController < ApplicationController
   def create
-    if session.nil?
-      redirect_to '/'
-      return
-    end
-    if session[:user_id].nil?
-      redirect_to '/'
-      return
-    end
-    ref = Referee.find_by(id: session[:user_id])
-    if ref.nil?
-      redirect_to '/'
-      return
-    end
-    unless ref.level.eql? 1
-      redirect_to '/'
-      return
-    end
+    non_ref_redirect   
     if Team.all.size > 0
       redirect_to league_modify_url
       return
@@ -26,11 +10,13 @@ class LeagueController < ApplicationController
   end
 
   def reschedule
+    non_ref_redirect   
     if request.post?
     end
   end
 
   def modify
+    non_ref_redirect
     if request.post?
       Team.all.each_with_index do |team, i|
         unless team.name.eql? params['change']["team#{i}"]
@@ -105,4 +91,23 @@ class LeagueController < ApplicationController
     return days
   end
 
+  def non_ref_redirect
+    if session.nil?
+      redirect_to '/'
+      return
+    end
+    if session[:user_id].nil?
+      redirect_to '/'
+      return
+    end
+    ref = Referee.find_by(id: session[:user_id])
+    if ref.nil?
+      redirect_to '/'
+      return
+    end
+    unless ref.level.eql? 1
+      redirect_to '/'
+      return
+    end
+  end
 end
