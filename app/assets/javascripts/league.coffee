@@ -21,7 +21,10 @@
   div
 
 @addBox = ->
-  document.getElementById('names').appendChild(genDiv())
+  div = document.getElementById('names')
+  children = div.childNodes
+  if children.length < 13
+    document.getElementById('names').appendChild(genDiv())
  
 @removeBox = ->
   div = document.getElementById('names')
