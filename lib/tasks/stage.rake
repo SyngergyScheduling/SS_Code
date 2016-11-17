@@ -10,3 +10,9 @@ task :create do
   db.execute "insert into referees values (?, ?, ?, ?, ?, ?)", [1, username2, password, Time.now.to_s, Time.now.to_s, 0]
   db.close
 end
+
+task :delete_teams_schedules do
+  db = SQLite3::Database.new "db/development.sqlite3"
+  db.execute('delete from teams;')
+  db.execute('delete from schedules;')
+end
