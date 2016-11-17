@@ -37,6 +37,6 @@ team_value = 0
 # There are some items that are implicitly added
 # to the div, therefore a div with only one text box
 # has 4 children.
-  if children.length > 4
+  if children.length > 5
     div.removeChild(children[children.length - 1])
     team_value -= 1
