@@ -8,13 +8,9 @@
     <p><%= value %></p>
   <% end %>
   <%=form_for :league do |f| %>
+    <h4>Teams</h4>
     <div id='names'>
-      <h4>Teams</h4>
-      <% 10.times do |i| %>
-        <div class="entry">
-        <%= f.text_field("team#{i}", placeholder: 'Team Name') %><br>
-        </div>
-      <% end %>
+      <!-- text boxes added here via javascript -->
     </div>
     <div id='start_date'>
       <%= f.label('start date:') %>
@@ -22,5 +18,11 @@
     </div>
     <%= f.submit :submit %>
   <% end %>
+  <button onClick=addBox()>Add Field</button>
+  <button onClick=removeBox()>Remove Field</button>
   <div>
 </div>
+
+<script>
+  addBox();
+</script>
