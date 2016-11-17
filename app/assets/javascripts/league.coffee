@@ -2,10 +2,15 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+team_value = 0
+
 @genTF = ->
   input = document.createElement('input')
   input.setAttribute('type', 'text')
   input.setAttribute('placeholder', 'Team Name')
+  input.setAttribute('id', "league_team#{team_value}")
+  input.setAttribute('name', "league[team#{team_value}]")
+  team_value += 1
   input
 
 @genB = ->
@@ -34,3 +39,4 @@
 # has 4 children.
   if children.length > 4
     div.removeChild(children[children.length - 1])
+    team_value -= 1
