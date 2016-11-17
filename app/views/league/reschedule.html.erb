@@ -3,3 +3,14 @@
 </div>
 <%= render "shared/navigation" %>
 
+<div class=form>
+  <h2>Reschedule</h2>
+  <% unless session['error'] == '' %>
+    <p><%= session['error'] %></p>
+  <% end %>
+  <%= form_for :reschedule do |f| %>
+    <%= date_select :reschedule, :start %><br>
+    <%= f.submit :save %>
+  <% end %>
+</div>
+

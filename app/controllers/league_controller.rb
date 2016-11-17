@@ -11,7 +11,23 @@ class LeagueController < ApplicationController
 
   def reschedule
     non_ref_redirect   
-    if request.post?
+    if request.get?
+      session['match'] = params['match']
+      session['error'] = ''
+    elsif request.post?
+      sd = params['reschedule']
+      year =  sd['start(1i)'].to_i
+      month =  sd['start(2i)'].to_i
+      day =  sd['start(3i)'].to_i
+      reschedule_day = DateTime.new(year, month, day)
+      unless reschedule_day.wday.eql? 6
+        session['error'] = 'Date not a saturday'
+	return
+      end
+      match = Schedule.where(id: session['match'])
+      match[0].date = reschedule_day
+      match[0].save
+      redirect_to '/'
     end
   end
 
