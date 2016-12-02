@@ -11,6 +11,12 @@ task :create do
   db.close
 end
 
+task :clearserver do
+  puts 'Clearing teams and schedules on server'
+  RestClient.get('jointhedockside.duckdns.org:3000/clearteams')
+  puts 'done'
+end
+
 task :delete_teams_schedules do
   db = SQLite3::Database.new "db/development.sqlite3"
   db.execute('delete from teams;')

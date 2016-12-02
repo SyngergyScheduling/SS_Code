@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'teams/all'
   post 'teams/create' => 'teams#create'
   post 'teams/member/create' => 'teams#add_member'
+  get 'clearteams' => 'teams#clear'
 
   get '/team_scoring/teamScoring'
   post 'team_scoring/score'

@@ -10,7 +10,7 @@ class TeamScoringController < ApplicationController
         cookies[:match] = params['match']
     @team1 = Team.find_by(id: params['id1'])
     @team2 = Team.find_by(id: params['id2'])
-        @match = Schedule.find_by(id: params['match'])
+    @match = Schedule.find_by(id: params['match'])
   end
 
   def score
