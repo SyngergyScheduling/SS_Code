@@ -62,20 +62,13 @@ class LeagueController < ApplicationController
     unless start_date.wday.eql? 6
       session['error'] << 'date is not a saturday'
       error = true
-      #redirect_to league_create_url
-      #return
     end
 
     params['league'].each do |key, value|
-      #if count.eql? 10
-        #render "Error!"
-      #end
-      puts value.eql? ""
       if value.eql? ""
 	session['error'] << "Error: text box must contain a value"
         error = true
       else
-        puts value.eql? ""
         teams << Team.new('name': value)
         begin
           teams[-1].save
