@@ -1,8 +1,9 @@
 class TeamScoringController < ApplicationController
-  
-  
   def teamScoring
     if session[:user_id].nil?
+      redirect_to '/'
+    end
+    if params['id1'].nil? or params['id2'].nil? or params['match'].nil?
       redirect_to '/'
     end
     cookies[:team1] = params['id1']
