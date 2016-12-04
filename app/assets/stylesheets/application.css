@@ -27,6 +27,15 @@ body {
   padding: 0;
 }
 
+ul {
+  padding:0px;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
 #title {
   /* need to pick a good font for this */
   background-color: #6B7B96;

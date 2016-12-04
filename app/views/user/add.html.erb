@@ -12,7 +12,7 @@
     <p style="color:white">User successfully created</p>
         <% session[:created] = false %>
   <% end %>
-  <%= form_for :new, url: {action: 'submit'} do |f| %>
+  <%= form_for :new do |f| %>
     <%= f.label :username %><br>
     <%= f.text_field :username %><br>
     <%= f.label :password %><br>

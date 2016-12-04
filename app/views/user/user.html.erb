@@ -1,0 +1,13 @@
+<div id=title>
+  <h1>Synergy Scheduling</h1>
+</div>
+<%= render 'shared/navigation' %>
+
+<div id=options class=form>
+ <h4>Referee Management and User Settings</h4>
+ <ul>
+   <li><%= link_to "Change Password", controller: 'user', 'action': 'change_pass' %></li>
+   <li><%= link_to "Add Referee", controller: 'user', 'action': 'add' %></li>
+   <li><%= link_to "Remove Referee", controller: 'user', 'action': 'remove' %></li>
+ </ul>
+</div>
