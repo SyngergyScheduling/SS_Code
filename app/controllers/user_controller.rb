@@ -1,4 +1,4 @@
-class AddUserController < ApplicationController
+class UserController < ApplicationController
 def add
         unless session[:user_id].nil? 
           logged_in = true 
@@ -13,6 +13,15 @@ def add
         puts session[:created]
     session[:username_taken] ||= false
         session[:created] ||= false
+end
+
+def user
+end
+
+def remove
+end
+
+def change_pass
 end
 
 def submit
