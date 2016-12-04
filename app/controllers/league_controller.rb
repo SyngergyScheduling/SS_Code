@@ -5,7 +5,6 @@ class LeagueController < ApplicationController
       redirect_to league_modify_url
       return
     end
-
     session['error'] ||= []
   end
 
@@ -62,14 +61,21 @@ class LeagueController < ApplicationController
     start_date = DateTime.new(year, month, day)
     unless start_date.wday.eql? 6
       session['error'] << 'date is not a saturday'
-      redirect_to league_create_url
-      return
+      error = true
+      #redirect_to league_create_url
+      #return
     end
+
     params['league'].each do |key, value|
-      if count.eql? 10
-        render "Error!"
-      end
-      unless value.eql? ""
+      #if count.eql? 10
+        #render "Error!"
+      #end
+      puts value.eql? ""
+      if value.eql? ""
+	session['error'] << "Error: text box must contain a value"
+        error = true
+      else
+        puts value.eql? ""
         teams << Team.new('name': value)
         begin
           teams[-1].save
@@ -77,17 +83,24 @@ class LeagueController < ApplicationController
         rescue  ActiveRecord::RecordNotUnique
           session['error'] << "Team #{value} already exists"
           error = true
+	  break
         end
       end
     end
-    league_schedule = schedule(team_ids)
-    league_schedule.each do |day|
-      day.each do |pair|
-        Schedule.new('team1_id': pair[0], 'team2_id': pair[1], date: start_date).save
+    unless error
+      league_schedule = schedule(team_ids)
+      league_schedule.each do |day|
+        day.each do |pair|
+          Schedule.new('team1_id': pair[0], 'team2_id': pair[1], date: start_date).save
+        end
+        start_date += 7
       end
-      start_date += 7
     end
+
     if error
+      Team.all.each do |team|
+        team.delete
+      end
       redirect_to league_create_url
       return
     end
