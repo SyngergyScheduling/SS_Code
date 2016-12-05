@@ -2,6 +2,8 @@
 <!-- We made a decision to break best practice with this bit of code and  -->
 <!-- are including logic in this html file using embeded ruby.            -->
 
+<!---------------------------------------------------------------->
+
 <% require 'set' %>
 <% dates = Set.new %>
 <% Schedule.all.each do |match| %>
@@ -18,18 +20,27 @@
   <% end %>
 <% end %>
 
-<ul class="tab">
-  <% previous_day = DateTime.new %>
-  <% dates.each do |date| %>
-    <% formated_date = "#{date.month}/#{date.day}/#{date.year}" %>
-      <% default = '' %>
-    <% if previous_day < today and date >= today %>
-      <% default = 'defaultOpen' %>
+<!---------------------------------------------------------------->
+
+<% if dates.size == 0 %>
+  <div id=nothingHere>
+    <h3>There's nothing here!</h3>
+    <p>Login as a Super Referee to start a league!</p>
+  </div>
+<% else %>
+  <ul class="tab">
+    <% previous_day = DateTime.new %>
+    <% dates.each do |date| %>
+      <% formated_date = "#{date.month}/#{date.day}/#{date.year}" %>
+        <% default = '' %>
+      <% if previous_day < today and date >= today %>
+        <% default = 'defaultOpen' %>
+      <% end %>
+      <li><a href="javascript:void(0)" id = '<%= default %>' class="tablinks" onclick="openWeek(event, 
+      '<%= formated_date %>')"><%= formated_date %></a></li>
     <% end %>
-    <li><a href="javascript:void(0)" id = '<%= default %>' class="tablinks" onclick="openWeek(event, 
-    '<%= formated_date %>')"><%= formated_date %></a></li>
-  <% end %>
-</ul>
+  </ul>
+<% end %>
 
 <body>
 <% dates.each_with_index do |date, i| %>
