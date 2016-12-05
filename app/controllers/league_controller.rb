@@ -1,3 +1,4 @@
+require 'set'
 class LeagueController < ApplicationController
   def create
     non_ref_redirect   
@@ -35,13 +36,21 @@ class LeagueController < ApplicationController
     cookies['error'] = [] 
     failed = false
     if request.post?
+      team_set = Set.new
+      params['change'].each do |key, value|
+        team_set << value
+      end
+      unless team_set.size == params['change'].size
+        cookies['error'] << "repeated name!"
+	failed = true
+      end
       Team.all.each_with_index do |team, i|
         if params['change']["team #{i}"].eql? ''
           cookies['error'] << "#{team.name} must have a name"
           failed = true
         else
           team.name = params['change']["team #{i}"]
-          team.save
+          team.save unless failed
         end
       end
       redirect_to teams_all_url unless failed
