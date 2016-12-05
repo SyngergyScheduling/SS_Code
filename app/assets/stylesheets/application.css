@@ -36,6 +36,19 @@ a {
   text-decoration: none;
 }
 
+#nothingHere {
+  margin: auto;
+  display: block;
+  color: #FFFFFF;
+  width: 80%;
+  height: 50%;
+  background-color: #47597B;
+  border: 3px solid #46597B;
+  border-radius: 25px;
+  box-shadow: 3px 3px #0C1B38;
+  text-align: center;
+}
+
 #title {
   /* need to pick a good font for this */
   background-color: #6B7B96;
