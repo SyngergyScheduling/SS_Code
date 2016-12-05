@@ -17,6 +17,7 @@ class UserController < ApplicationController
 
   def user
     non_ref_redirect
+    @sr = Referee.find_by_id(session[:user_id]).level.eql? 1
   end
 
   def remove
@@ -88,10 +89,6 @@ class UserController < ApplicationController
     end
     ref = Referee.find_by(id: session[:user_id])
     if ref.nil?
-      redirect_to '/'
-      return
-    end
-    unless ref.level.eql? 1
       redirect_to '/'
       return
     end
