@@ -19,6 +19,10 @@ class UserController < ApplicationController
       password = params['new']['password']
       password2 = params['new']['password2']
       ref = Referee.find_by_username(username)
+      if username.eql? "" or password.eql? ""
+        repeat = true
+	session[:error] << "blank text box"
+      end
       unless password == password2
         repeat = true
 	session[:error] << "passwords do not match"
@@ -31,7 +35,9 @@ class UserController < ApplicationController
         puts 'here'
         redirect_to 'user/add'
       else
-        ref = Referee.new("username" => username, "password" => password, "level" => 0)
+        level = params['level']['user_level'].to_i
+	puts level
+        ref = Referee.new("username" => username, "password" => password, "level" => level)
         ref.save
 	session[:error] = ['user created successfully']
         redirect_to '/user/add'

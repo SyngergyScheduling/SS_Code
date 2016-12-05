@@ -17,6 +17,8 @@
     <%= f.password_field :password %><br>
     <%= f.label 'retype password' %><br>
     <%= f.password_field :password2 %><br>
+    <%= f.label "referee level" %>
+    <%= select(:level, :user_level, [['0', 0], ['1', 1]]) %><br>
     <%= f.submit :new %>
   <% end %>
 </div>
