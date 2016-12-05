@@ -4,19 +4,19 @@
 <%= render 'shared/navigation' %>
 
 <div id=login class=form>
-  <% if session[:username_taken] %>
-    <p style="color:white">Username already exists</p>
-        <% session[:username_taken] = false %>
+  <% if session['created'] %>
+    <p>user created successfully</p>
   <% end %>
-  <% if session[:created] %>
-    <p style="color:white">User successfully created</p>
-        <% session[:created] = false %>
+  <% session[:error].each do |error| %>
+    <p><%= error %></p>
   <% end %>
   <%= form_for :new do |f| %>
     <%= f.label :username %><br>
     <%= f.text_field :username %><br>
     <%= f.label :password %><br>
     <%= f.password_field :password %><br>
+    <%= f.label 'retype password' %><br>
+    <%= f.password_field :password2 %><br>
     <%= f.submit :new %>
   <% end %>
 </div>

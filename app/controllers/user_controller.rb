@@ -9,19 +9,53 @@ class UserController < ApplicationController
      unless level.eql? 1
        redirect_to '/'
     end
-    puts session[:username_taken]
-    puts session[:created]
-    session[:username_taken] ||= false
     session[:created] ||= false
+    session[:error] ||= []
+    if request.post?
+      session[:error] = []
+      repeat = false
+      non_ref_redirect
+      username = params['new']['username']
+      password = params['new']['password']
+      password2 = params['new']['password2']
+      ref = Referee.find_by_username(username)
+      unless password == password2
+        repeat = true
+	session[:error] << "passwords do not match"
+      end
+      if ref
+        repeat = true
+        session[:error] << "Username already exists"
+      end
+      if repeat
+        puts 'here'
+        redirect_to 'user/add'
+      else
+        ref = Referee.new("username" => username, "password" => password, "level" => 0)
+        ref.save
+	session[:error] = ['user created successfully']
+        redirect_to '/user/add'
+      end
+    end
   end
 
   def user
     non_ref_redirect
+    session[:error] = []
     @sr = Referee.find_by_id(session[:user_id]).level.eql? 1
   end
 
   def remove
     non_ref_redirect
+    if request.post?
+      params['remove'].each do |key, value|
+        puts 'here'
+        if value.eql? '1'
+	  Referee.find_by(id: key).destroy
+	end
+      end
+      redirect_to '/user'
+    end
   end
 
   def change_pass
@@ -62,20 +96,6 @@ class UserController < ApplicationController
   end
 
   def submit
-    non_ref_redirect
-    username = params['new']['username']
-    password = params['new']['password']
-    ref = Referee.find_by_username(username)
-    if ref
-      session[:username_taken] = true
-      redirect_to '/add_user/add'
-    else
-          ref = Referee.new("username" => username, "password" => password, "level" => 0)
-          ref.save
-      session[:username_taken] = false
-          session[:created] = true
-      redirect_to '/add_user/add'
-    end
   end
 
   def non_ref_redirect

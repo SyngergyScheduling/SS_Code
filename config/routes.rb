@@ -28,9 +28,7 @@ Rails.application.routes.draw do
   get 'user/remove'
   get 'user/change_pass'
   post 'user/change_pass'
-  #get 'add_user/add'
-  #post'add_user/add'
-  #post 'add_user/submit'
-  #post 'add_user/add/new' => 'add_user#add'
+  post 'user/remove'
+  post 'user/add'
 
 end
