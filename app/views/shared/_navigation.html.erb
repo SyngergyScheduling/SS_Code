@@ -17,11 +17,9 @@
 	  <%= link_to "League", controller: 'league', 'action': 'create' %> 
 	</li>
       <% end %>
-	  <% if level.eql? 1%>
-	    <li>
-              <%= link_to "User Settings", controller: 'user', 'action': 'user' %>
-	    </li>
-	  <% end %>
+      <li>
+       <%= link_to "User Settings", controller: 'user', 'action': 'user' %>
+      </li>
       <li>
         <%= link_to "Log Out", controller: "login", action: "logout" %>
       </li>

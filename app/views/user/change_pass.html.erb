@@ -2,3 +2,16 @@
   <h1>Synergy Scheduling</h1>
 </div>
 <%= render "shared/navigation" %>
+
+<div class=form>
+  <h4>Change password</h4>
+  <% session['error'].each do |error| %>
+    <p><%=error%></p>
+  <% end %>
+  <%= form_for :new_password do |f| %> 
+    Old Password <%= f.password_field :old_password %><br>
+    New Password <%= f.password_field :new_password1 %><br>
+    Retype Password <%= f.password_field :new_password2 %><br>
+    <%= f.submit :save %>
+  <% end %>
+</div>
