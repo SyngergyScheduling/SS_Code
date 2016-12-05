@@ -36,17 +36,6 @@ a {
   text-decoration: none;
 }
 
-div.add-remove label {
-  margin-left: 10px;
-  padding-left: 5px;
-  padding-right: 5px;
-  background-color: #000000;
-}
-
-div.add-remove li {
-  margin-bottom: 20px;
-}
-
 #title {
   /* need to pick a good font for this */
   background-color: #6B7B96;
