@@ -2,3 +2,20 @@
   <h1>Synergy Scheduling</h1>
 </div>
 <%= render "shared/navigation" %>
+
+<div class="form add-remove">
+  <h3>Remove Referees</h3>
+  <%= form_for :remove do |f| %>
+    <ul>
+      <% Referee.all.each do |ref| %>
+        <% unless session[:user_id] == ref.id %>
+          <li>
+	    <%=ref.username%>
+	    <%= f.check_box "#{ref.id}" %>
+	  </li>
+	<% end %>
+      <% end %>
+    </ul>
+    <%= f.submit :save %>
+  <% end %>
+</div>
